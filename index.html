@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Booking Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Bus Booking System</h1>
+        <nav>
+            <button onclick="showSection('home')">Home</button>
+            <button onclick="showSection('buses')">Buses</button>
+            <button onclick="showSection('bookings')">My Bookings</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home-section" class="section active">
+            <h2>Welcome to Our Bus Booking System</h2>
+            <p>Book buses with ease. Browse our collection of reliable and comfortable bus services across major cities.</p>
+            <div class="featured">
+                <div class="featured-item">
+                    <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=300" alt="Bus">
+                    <h3>Comfortable Buses</h3>
+                    <p>From ₹850/seat</p>
+                    <button onclick="showSection('buses')">View Buses</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="buses-section" class="section">
+            <h2>Available Buses</h2>
+            <div id="buses-list" class="items-grid"></div>
+        </section>
+
+        <section id="bookings-section" class="section">
+            <h2>My Bookings</h2>
+            <div id="bookings-list"></div>
+        </section>
+
+        <div id="booking-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2 id="modal-title">Book Now</h2>
+                <form id="booking-form">
+                    <input type="hidden" id="booking-type">
+                    <input type="hidden" id="booking-item-id">
+                    <label for="booking-name">Name:</label>
+                    <input type="text" id="booking-name" required>
+                    <label for="booking-email">Email:</label>
+                    <input type="email" id="booking-email" required>
+                    <label for="booking-date">Check-in/Departure Date:</label>
+                    <input type="date" id="booking-date" required>
+                    <label for="booking-guests">Number of Guests/Seats:</label>
+                    <input type="number" id="booking-guests" min="1" required>
+                    <button type="submit">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Bus Booking System. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

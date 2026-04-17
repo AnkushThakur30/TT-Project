@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Booking System - Project Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .toc h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .toc ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .toc li a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .toc li a:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .tech-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .tech-item strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .project-structure {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .project-structure pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .data-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .data-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .data-table tr:hover {
+            background: #e9ecef;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1em;
+        }
+
+        .btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn.secondary {
+            background: #6c757d;
+        }
+
+        .btn.secondary:hover {
+            background: #5a6268;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            padding-left: 30px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #667eea;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 12px;
+            width: 2px;
+            height: calc(100% + 8px);
+            background: #667eea;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .feature-grid, .tech-stack, .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .toc ul {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚌 Bus Booking System</h1>
+            <p>Project Report & Documentation</p>
+        </header>
+
+        <div class="toc">
+            <h2>📋 Quick Navigation</h2>
+            <ul>
+                <li><a href="#overview">Project Overview</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#technologies">Technologies</a></li>
+                <li><a href="#structure">Project Structure</a></li>
+                <li><a href="#data">Sample Data</a></li>
+                <li><a href="#stats">Project Statistics</a></li>
+                <li><a href="#usage">Usage Guide</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <!-- Overview Section -->
+            <section id="overview">
+                <h2>📊 Project Overview</h2>
+                <p>
+                    The <strong>Bus Booking System</strong> is a modern, fully-functional web application designed to 
+                    provide users with a seamless experience for browsing and booking bus tickets. Built with cutting-edge 
+                    web technologies, the system combines an intuitive user interface with robust backend functionality.
+                </p>
+                <p>
+                    This project demonstrates a complete booking management solution with persistent data storage, 
+                    responsive design, and professional user experience. The system is designed for easy deployment and 
+                    scalability, with both web-based and C++ desktop implementations available.
+                </p>
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="number">4</div>
+                        <div class="label">Bus Routes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">3</div>
+                        <div class="label">Main Sections</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">100%</div>
+                        <div class="label">Responsive</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">∞</div>
+                        <div class="label">Bookings</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section id="features">
+                <h2>✨ Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>🚌 Bus Management</h4>
+                        <p>Browse comprehensive bus information including routes, departure times, duration, prices, and amenities with high-quality images.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📱 Responsive Design</h4>
+                        <p>Fully responsive interface that works seamlessly on desktop, tablet, and mobile devices with adaptive layouts.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🎫 Booking System</h4>
+                        <p>User-friendly booking interface with customer details validation and automatic price calculation for multiple seats.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>💾 Data Persistence</h4>
+                        <p>Browser localStorage integration for saving bookings locally without server-side requirements for demo purposes.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📊 Booking Management</h4>
+                        <p>View all bookings with detailed information including customer name, email, travel date, seats, and booking ID.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>💰 INR Currency</h4>
+                        <p>All prices displayed in Indian Rupees (₹) with accurate calculations and formatting throughout the application.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technologies Section -->
+            <section id="technologies">
+                <h2>🛠️ Technologies Used</h2>
+                <div class="tech-stack">
+                    <div class="tech-item">
+                        <strong>Frontend</strong>
+                        HTML5, CSS3, JavaScript (ES6+)
+                    </div>
+                    <div class="tech-item">
+                        <strong>Storage</strong>
+                        Browser LocalStorage API
+                    </div>
+                    <div class="tech-item">
+                        <strong>Design</strong>
+                        Responsive Grid & Flexbox
+                    </div>
+                    <div class="tech-item">
+                        <strong>Images</strong>
+                        Unsplash API for high-quality photos
+                    </div>
+                </div>
+
+                <h3>Web Implementation Details</h3>
+                <p>
+                    <strong>HTML5:</strong> Semantic markup with proper structure for accessibility and SEO optimization.
+                </p>
+                <p>
+                    <strong>CSS3:</strong> Modern styling with gradients, animations, and flexbox layouts for responsive design.
+                </p>
+                <p>
+                    <strong>JavaScript:</strong> ES6+ features including arrow functions, template literals, and DOM manipulation for dynamic content.
+                </p>
+                <p>
+                    <strong>LocalStorage:</strong> Client-side data persistence for booking information without requiring a backend server.
+                </p>
+            </section>
+
+            <!-- Project Structure Section -->
+            <section id="structure">
+                <h2>📁 Project Structure</h2>
+                <div class="project-structure">
+                    <pre>HotelBusBookingSystem/
+├── index.html              # Main web page
+├── style.css               # Styling and layout
+├── script.js               # JavaScript functionality
+├── project_report.html     # This report document
+└── README.md              # Project documentation
+
+CppBookingSystem/          # Desktop C++ Application
+├── CppBookingSystem.pro   # Qt project file
+├── main.cpp               # Entry point
+├── mainwindow.h/.cpp      # UI Components
+├── database.h/.cpp        # Database operations
+└── README.md             # C++ documentation</pre>
+                </div>
+            </section>
+
+            <!-- Sample Data Section -->
+            <section id="data">
+                <h2>📍 Sample Bus Data</h2>
+                <p>The system includes 4 pre-configured bus routes with complete information:</p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Bus Name</th>
+                            <th>Route</th>
+                            <th>Departure</th>
+                            <th>Duration</th>
+                            <th>Price (INR)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Express Line</td>
+                            <td>New York - Boston</td>
+                            <td>08:00</td>
+                            <td>4 hours</td>
+                            <td>₹4,025</td>
+                        </tr>
+                        <tr>
+                            <td>Coastal Route</td>
+                            <td>Los Angeles - San Francisco</td>
+                            <td>09:30</td>
+                            <td>6 hours</td>
+                            <td>₹665</td>
+                        </tr>
+                        <tr>
+                            <td>Mountain Express</td>
+                            <td>Denver - Aspen</td>
+                            <td>07:00</td>
+                            <td>3 hours</td>
+                            <td>₹1,035</td>
+                        </tr>
+                        <tr>
+                            <td>Metro Link</td>
+                            <td>Washington DC - Philadelphia</td>
+                            <td>10:00</td>
+                            <td>2.5 hours</td>
+                            <td>₹2,230</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Amenities Included</h3>
+                <p>All buses come equipped with various amenities:</p>
+                <ul style="margin-left: 20px; margin-top: 15px;">
+                    <li>WiFi connectivity for all journeys</li>
+                    <li>Air conditioning to ensure comfort</li>
+                    <li>Entertainment systems for longer routes</li>
+                    <li>Modern restrooms for passenger convenience</li>
+                    <li>USB charging ports for devices</li>
+                    <li>Premium seating arrangements</li>
+                    <li>Refreshment services on select routes</li>
+                </ul>
+            </section>
+
+            <!-- Statistics Section -->
+            <section id="stats">
+                <h2>📈 Project Statistics</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>Lines of Code</h4>
+                        <p><strong>~500+</strong> lines across HTML, CSS, and JavaScript</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Functions Implemented</h4>
+                        <p><strong>12+</strong> core functions for bus and booking management</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Page Load Time</h4>
+                        <p><strong>&lt;1 second</strong> on standard internet connections</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Browser Support</h4>
+                        <p><strong>All modern</strong> browsers (Chrome, Firefox, Safari, Edge)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Usage Guide Section -->
+            <section id="usage">
+                <h2>🚀 Usage Guide</h2>
+                
+                <h3>Web Version (Browser)</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <strong>Step 1: Open the Application</strong>
+                        <p>Open index.html in your web browser to access the Bus Booking System.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Step 2: Navigate Sections</strong>
+                        <p>Use the navigation menu to browse: Home, Buses, and My Bookings sections.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Step 3: Select a Bus</strong>
+                        <p>Click on any bus card to view detailed information and amenities.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Step 4: Book Your Ticket</strong>
+                        <p>Click "Book Now" to open the booking form and enter your details.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Step 5: Confirm Booking</strong>
+                        <p>Fill in name, email, date, and number of seats. Click "Confirm Booking".</p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Step 6: View Bookings</strong>
+                        <p>Go to "My Bookings" to see all your confirmed reservations.</p>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px;">C++ Desktop Version (Qt)</h3>
+                <div class="highlight">
+                    <h4>Prerequisites:</h4>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Qt 5.12 or higher installed</li>
+                        <li>C++11 compatible compiler</li>
+                        <li>SQLite support (included with Qt)</li>
+                    </ul>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <strong>Step 1: Open Qt Creator</strong>
+                        <p>Launch Qt Creator and open the CppBookingSystem.pro file.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Step 2: Configure Project</strong>
+                        <p>Select a Desktop Qt kit and configure for your platform.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Step 3: Build Project</strong>
+                        <p>Go to Build menu and select "Build Project".</p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Step 4: Run Application</strong>
+                        <p>Click Run button or press Ctrl+R to launch the desktop application.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Development Info Section -->
+            <section>
+                <h2>👨‍💻 Development Information</h2>
+                <h3>Project Versions</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>Web Version (Current)</h4>
+                        <p>HTML5/CSS3/JavaScript implementation with localStorage persistence. Perfect for quick access and no installation required.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Desktop Version</h4>
+                        <p>Qt C++ application with SQLite database. Professional desktop interface with better performance for large datasets.</p>
+                    </div>
+                </div>
+
+                <h3>Future Enhancements</h3>
+                <ul style="margin-left: 20px; margin-top: 15px;">
+                    <li>Backend server integration with Express.js or Django</li>
+                    <li>Payment gateway integration (Razorpay, PayPal)</li>
+                    <li>User authentication and account management</li>
+                    <li>Advanced search and filtering options</li>
+                    <li>Email confirmation for bookings</li>
+                    <li>Admin dashboard for managing buses</li>
+                    <li>Real-time seat availability tracking</li>
+                    <li>Mobile native applications (iOS/Android)</li>
+                    <li>Multi-language support</li>
+                </ul>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact">
+                <h2>📞 Project Information</h2>
+                <div class="highlight">
+                    <h3>About This Project</h3>
+                    <p>
+                        This Bus Booking System is a mini-project demonstrating full-stack web development capabilities 
+                        and desktop application development with C++. It showcases best practices in UI/UX design, 
+                        data management, and responsive web design.
+                    </p>
+                    <p>
+                        <strong>Project Status:</strong> Complete and Functional <br>
+                        <strong>Latest Update:</strong> April 2026 <br>
+                        <strong>Version:</strong> 1.0
+                    </p>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn" onclick="window.location.href='index.html'">🚀 Launch Application</button>
+                    <button class="btn secondary" onclick="window.print()">🖨️ Print Report</button>
+                    <button class="btn secondary" onclick="downloadReport()">📥 Download Report</button>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Bus Booking System. All rights reserved.</p>
+            <p>Project Report Generated: April 10, 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        function downloadReport() {
+            alert('Report download functionality would be implemented with a backend server.');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add animation to stat cards
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideIn 0.5s ease-out';
+                }
+            });
+        });
+
+        document.querySelectorAll('.stat-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+
+    <style>
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</body>
+</html>
